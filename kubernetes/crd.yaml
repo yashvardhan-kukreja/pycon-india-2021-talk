@@ -1,0 +1,37 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: postgres-writers.demo.yash.com
+spec:
+  group: demo.yash.com
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          required: ["spec"]
+          properties:
+            spec:
+              type: object
+              required: ["table", "name", "age", "country"]
+              properties:
+                table:
+                  type: string
+                name:
+                  type: string
+                age:
+                  type: integer
+                country:
+                  type: string
+  scope: Namespaced
+  names:
+    plural: postgres-writers
+    singular: postgres-writer
+    kind: PostgresWriter
+    shortNames:
+    - psw
+
+
+    

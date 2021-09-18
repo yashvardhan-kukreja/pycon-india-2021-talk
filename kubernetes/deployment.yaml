@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-writer-operator
+  namespace: postgres
+  labels:
+    app: postgres-writer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-writer
+  template:
+    metadata:
+      labels:
+        app: postgres-writer
+    spec:
+      serviceAccountName: postgres-writer
+      containers:
+      - name: postgres-writer
+        image: postgres-writer:latest
+        imagePullPolicy: IfNotPresent
+        env: ##  preferably load this via a configmap or/and secret instead
+          - name: PSQL_HOST
+            value: "184.73.10.62"
+          - name: PSQL_USERNAME
+            value: postgres
+          - name: PSQL_PASSWORD
+            value: password
+          - name: PSQL_DB
+            value: postgres
