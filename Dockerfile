@@ -4,4 +4,4 @@ RUN apt-get install -y curl vim
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY . .
-CMD ["kopf", "run", "op.py"]
+CMD ["kopf", "run", "operator.py"]
